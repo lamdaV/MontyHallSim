@@ -27,15 +27,15 @@ public class MontyHallSimulator {
 
 	/**
 	 * Resets the simulator for subsequent runs.
-	 *
+	 * 
 	 */
 	public void resetSim() {
 		this.givenWrongDoor = -1;
 	}
-	
+
 	/**
 	 * Sets the userChoice to the desired choice.
-	 *
+	 * 
 	 * @param userChoice
 	 */
 	public void setUserChoice(int userChoice) {
@@ -44,7 +44,7 @@ public class MontyHallSimulator {
 
 	/**
 	 * Prints the options onto the console.
-	 *
+	 * 
 	 */
 	public void printDoors() {
 		String[] printSelection = new String[3];
@@ -76,30 +76,33 @@ public class MontyHallSimulator {
 	}
 
 	/**
-	 * Returns one of the two incorrect choices. It invalidates it from the options array with a -1.
+	 * Returns one of the two incorrect choices. It invalidates it from the
+	 * options array with a -1.
 	 * 
 	 * @return integer of an incorrect choice.
 	 */
 	public int getWrongDoor() {
 		setRandomChoice();
-		
+
 		int randomWrongChoice;
-		
+
 		while (true) {
 			randomWrongChoice = new Random().nextInt(this.options.length);
-			
-			if (this.options[randomWrongChoice] != this.randomChoice && this.options[randomWrongChoice] != this.userChoice) {
+
+			if (this.options[randomWrongChoice] != this.randomChoice
+					&& this.options[randomWrongChoice] != this.userChoice) {
 				break;
 			}
 		}
-		
+
 		this.givenWrongDoor = randomWrongChoice;
-		
+
 		return this.options[randomWrongChoice];
 	}
 
 	/**
-	 * Switches the userChoice to an unselected option that has not been given away.
+	 * Switches the userChoice to an unselected option that has not been given
+	 * away.
 	 * 
 	 */
 	public void switchDoor() {
@@ -117,18 +120,21 @@ public class MontyHallSimulator {
 
 	/**
 	 * Checks if the user was correct.
-	 *
+	 * 
+	 * @param isAutomate 
+	 * 
 	 * @return the boolean that corresponds with the user's correctness.
 	 */
-	public boolean checkValidity() {
+	public boolean checkValidity(boolean isAutomate) {
 		if (this.userChoice == this.randomChoice) {
-			System.out.println("Congrats! You Win!");
+			if (!(isAutomate)) {
+				System.out.println("Congrats! You Win!");
+			}
 			return true;
 		}
-		System.out.println("You Lose!");
+		if (!(isAutomate)) {
+			System.out.println("You Lose!");
+		}
 		return false;
 	}
-	
-	
-
 }
